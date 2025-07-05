@@ -59,7 +59,14 @@ export default async function handler(
           .json({ message: "Failed to parse the CSV file." });
       }
 
-      const fileData = parseResult.data as any[];
+      const fileData = parseResult.data.map((row: any) => {
+        return {
+          ...row,
+          raw_json: {
+            ...row,
+          },
+        };
+      });
 
       if (fileData.length === 0) {
         return res
