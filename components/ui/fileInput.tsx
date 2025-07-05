@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Loader2Icon,
   UploadCloud,
@@ -19,6 +20,7 @@ export function FileInput() {
     "idle" | "success" | "error"
   >("idle");
   const [message, setMessage] = useState("");
+  const router = useRouter();
 
   const handleCancel = () => {
     setSelectedFile(null);
@@ -56,6 +58,7 @@ export function FileInput() {
         setUploadStatus("success");
         setMessage(result.message ?? "File uploaded successfully!");
         setSelectedFile(null); // Clear the file on successful upload
+        router.push("/results");
       } else {
         setUploadStatus("error");
         setMessage(result.message ?? "An unknown error occurred.");
