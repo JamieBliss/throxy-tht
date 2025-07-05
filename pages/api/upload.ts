@@ -45,7 +45,11 @@ export default async function handler(
       const parseResult = Papa.parse(fileContent, {
         header: true,
         skipEmptyLines: true,
-        transform: (value: any) => (value === "" ? null : value),
+        transform: (value) => {
+          if (typeof value !== "string") return value;
+          const trimmedValue = value.trim();
+          return trimmedValue;
+        },
       });
 
       if (parseResult.errors.length) {
@@ -66,7 +70,7 @@ export default async function handler(
       const { data, error } = await supabase
         .from("Companies")
         .upsert(fileData, {
-          onConflict: "company_name, domain",
+          onConflict: "company_name,domain",
           ignoreDuplicates: false,
         });
       if (error) {
