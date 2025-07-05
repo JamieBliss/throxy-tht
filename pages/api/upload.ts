@@ -11,13 +11,13 @@ export const config = {
   },
 };
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const geminiApiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_ANON_KEY;
+const geminiApiKey = process.env.GEMINI_API_KEY;
 
 if (!supabaseUrl || !supabaseKey || !geminiApiKey) {
   throw new Error(
-    "Missing NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY or NEXT_PUBLIC_GEMINI_API_KEY environment variables"
+    "Missing SUPABASE_URL,SUPABASE_ANON_KEY or GEMINI_API_KEY environment variables"
   );
 }
 const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey);
