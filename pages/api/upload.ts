@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { IncomingForm } from "formidable";
 import fs from "fs";
-import { SupabaseClient, createClient } from "@supabase/supabase-js";
 import Papa from "papaparse";
 import { GoogleGenAI, Type } from "@google/genai";
+import { supabase } from "@/lib/supabase/supabaseClient"
 
 export const config = {
   api: {
@@ -11,16 +11,11 @@ export const config = {
   },
 };
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_ANON_KEY;
 const geminiApiKey = process.env.GEMINI_API_KEY;
 
-if (!supabaseUrl || !supabaseKey || !geminiApiKey) {
-  throw new Error(
-    "Missing SUPABASE_URL,SUPABASE_ANON_KEY or GEMINI_API_KEY environment variables"
-  );
+if (!geminiApiKey) {
+  throw new Error("Missing GEMINI_API_KEY environment variable");
 }
-const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey);
 
 const ai = new GoogleGenAI({
   apiKey: geminiApiKey,
