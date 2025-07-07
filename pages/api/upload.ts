@@ -3,7 +3,7 @@ import { IncomingForm } from "formidable";
 import fs from "fs";
 import Papa from "papaparse";
 import { GoogleGenAI, Type } from "@google/genai";
-import { supabase } from "@/lib/supabase/supabaseClient"
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 export const config = {
   api: {

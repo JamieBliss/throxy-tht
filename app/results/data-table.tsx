@@ -4,7 +4,6 @@ import {
   ColumnFiltersState,
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   SortingState,
@@ -48,30 +47,18 @@ interface DataTableProps {
 
 export function DataTable({ data, columns, employee_sizes }: DataTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [activeFilterColumnId, setActiveFilterColumnId] = useState<
-    string | null
-  >(null);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
     data,
     columns,
-    manualFiltering: true,
     onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
     state: {
       sorting,
-      columnFilters,
       columnVisibility,
-      rowSelection,
     },
   });
 
@@ -99,7 +86,7 @@ export function DataTable({ data, columns, employee_sizes }: DataTableProps) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       updateUrl(filters);
-    }, 150); // waits 500ms after last keystroke
+    }, 300);
 
     return () => clearTimeout(timeout);
   }, [filters]);

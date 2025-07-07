@@ -31,10 +31,10 @@ export default async function ResultsPage({
   const result = await response.json();
   companies = result ?? [];
 
-  const employee_sizes_repsonse = await fetch(
+  const employeeSizesResponse = await fetch(
     `${process.env.BASE_URL}/api/employee_sizes`
   );
-  const employee_sizes = (await employee_sizes_repsonse.json()) ?? [];
+  const employee_sizes = (await employeeSizesResponse.json()) ?? [];
 
   return (
     <div className="flex h-screen items-center justify-center w-full">
