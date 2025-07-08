@@ -74,7 +74,7 @@ export function FileInput() {
   };
 
   return (
-    <div className="grid w-full max-w-sm items-center gap-4">
+    <div className="grid w-full max-w-lg items-center gap-4">
       <Label htmlFor="file-upload" className="text-center font-semibold">
         Upload CSV (the messier the better)
       </Label>
@@ -109,6 +109,7 @@ export function FileInput() {
           </Button>
           <Button
             onClick={handleCancel}
+            disabled={isLoading}
             size="sm"
             className="ml-2"
             variant="destructive"
